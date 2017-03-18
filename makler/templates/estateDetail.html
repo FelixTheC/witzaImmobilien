@@ -1,0 +1,214 @@
+{%extends 'index.html'%}
+{% load staticfiles %}
+{%block contact%}
+<div class="col-xs-12 col-md-offset-8 col-md-4 col-lg-offset-8 col-lg-4" style="display:none">
+    <h1>Contact</h1>
+    <form role="form" action="/thanks/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for e in estate %}
+        <input type="hidden" name="estate" value="{{e.id}}">
+        {%endfor%}
+        <button type="submit">Senden</button>
+    </form>
+</div>
+{%endblock%}
+{% block content %}
+<div class="col-xs-12 col-md-12 col-lg-12 container">
+    <div class="col-xs-12 col-md-4 col-lg-4 container">
+        {% for e in estate %}
+                <h1>{{e.title}}</h1>
+    </div>
+    {% for c in contact %}
+    <div class="col-xs-12 col-md-4 col-lg-4 container">
+                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <a href="tel:+49{{c.vorMobile}}{{c.mobile}}">(0){{c.vorMobile}} {{c.mobile}}</a> </br>
+
+    </div>
+    <div class="col-xs-12 col-md-4 col-lg-4 container">
+        <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                    <a href="{% url 'makler:contact' %}">{{c.mail}}</a></h3>
+                {% endfor %}
+    </div>
+</div>
+<div class="col-xs-12 col-md-7 col-lg-7">
+    <div class="jumbotron" style="padding-left:0; padding-top:10px; padding-bottom:0">
+            <table class="table ">
+                <tr>
+                <td class="table-detail">Objektart</td>
+                <td class="table-detail-ctn">{{e.objektart}}</td>
+                </tr>
+                <tr class="success">
+                <td class="table-detail">Lage</td>
+                <td class="table-detail-ctn"><a href="https://www.google.de/maps/place/{{e.lage.split|join:'+'}}/" target="_blank"
+                       style="color:black">{{e.lage}}</a></td>
+                </tr>
+                {% if e.addresse %}
+                <tr>
+                <td class="table-detail">Addresse</td>
+                <td class="table-detail-ctn"><a href="https://www.google.de/maps/place/{{e.addresse.split|join:'+'}}+{{e.lage.split|join:'+'}}/" target="_blank"
+                       style="color:black">{{e.addresse}}</a></td>
+                </tr>
+                {% endif %}
+                {% if e.baujahr %}
+                <tr>
+                <td class="table-detail">Baujahr</td>
+                <td class="table-detail-ctn">{{e.baujahr}}</td>
+                </tr>
+                {% endif %}
+                {% if e.grundstücksfl %}
+                <tr>
+                <td class="table-detail">Grundstücksfläche</td>
+                <td class="table-detail-ctn">{{e.grundstücksfl}} m<sup>2</sup></td>
+                </tr>
+                {% endif %}
+                {% if e.wohnfl %}
+                <tr>
+                <td class="table-detail">Wohnfläche</td>
+                <td class="table-detail-ctn">{{e.wohnfl}} m<sup>2</sup></td>
+                </tr>
+                {% endif %}
+                {% if e.gewerbefl %}
+                <tr>
+                <td class="table-detail">Gewerbefläche</td>
+                <td class="table-detail-ctn">{{e.gewerbefl}} m<sup>2</sup></td>
+                </tr>
+                {% endif %}
+                {% if e.nutzfl %}
+                <tr>
+                <td class="table-detail">Nutzfläche</td>
+                <td class="table-detail-ctn">{{e.nutzfl}} m<sup>2</sup></td>
+                </tr>
+                {% endif %}
+                {% if e.wheinheiten %}
+                <tr>
+                <td class="table-detail">Wohneinheiten</td>
+                <td class="table-detail-ctn">{{e.wheinheiten}}</td>
+                </tr>
+                {% endif %}
+                {% if e.gwbeinheiten %}
+                <tr>
+                <td class="table-detail">Gewerbeeinheiten</td>
+                <td class="table-detail-ctn">{{e.gwbeinheiten}}</td>
+                </tr>
+                {% endif %}
+                {% if e.stellpltz %}
+                <tr>
+                <td class="table-detail">Stellplätze</td>
+                <td class="table-detail-ctn">{{e.stellpltz}}</td>
+                </tr>
+                {% endif %}
+                {% if e.mieteinnhmSoll %}
+                <tr>
+                <td class="table-detail">Mieteinnahmen Soll</td>
+                <td class="table-detail-ctn">{{e.mieteinnhmSoll}} €</td>
+                </tr>
+                {% endif %}
+                {% if e.mieteinnhmIst %}
+                <tr>
+                <td class="table-detail">Mieteinnahmen Ist</td>
+                <td class="table-detail-ctn">{{e.mieteinnhmIst}} €</td>
+                </tr>
+                {% endif %}
+                {% if e.leerstand %}
+                <tr>
+                <td class="table-detail">Leerstand</td>
+                <td class="table-detail-ctn">{{e.leerstand}} %</td>
+                </tr>
+                {% endif %}
+                {% if e.kfpreis %}
+                <tr>
+                <td class="table-detail">Kaufpreis</td>
+                <td class="table-detail-ctn">{{e.kfpreis}} €</td>
+                </tr>
+                {% endif %}
+                {% if e.euroQuadratM %}
+                <tr>
+                <td class="table-detail">Euro/ m<sup>2</sup></td>
+                <td class="table-detail-ctn">{{e.euroQuadratM}} €</td>
+                </tr>
+                {% endif %}
+                {% if e.faktor %}
+                <tr>
+                <td class="table-detail">Faktor</td>
+                <td class="table-detail-ctn">{{e.faktor}} %</td>
+                </tr>
+                {% endif %}
+                <tr>
+                <td class="table-detail">Honorar</td>
+                {% if e.honorar %}
+                <td class="table-detail-ctn">{{e.honorar}} % incl gstzl. MwSt.</td>
+                    {% else %}
+                <td class="table-detail-ctn">keine gesonderte Käuferprovision</td>
+                </tr>
+                {% endif %}
+                {% if e.etagen %}
+                <tr>
+                <td class="table-detail">Etage</td>
+                <td class="table-detail-ctn">{{e.etagen}} %</td>
+                </tr>
+                {% endif %}
+                {% if e.anzahlZi %}
+                <tr>
+                <td class="table-detail">Anzahl Zimmer</td>
+                <td class="table-detail-ctn">{{e.anzahlZi}} %</td>
+                </tr>
+                {% endif %}
+                {% if e.hausgld %}
+                <tr>
+                <td class="table-detail">Hausgeld</td>
+                <td class="table-detail-ctn">{{e.hausgld}} %</td>
+                </tr>
+                {% endif %}
+                {% if e.lfzMietVertrg %}
+                <tr>
+                <td class="table-detail">Laufzeit Mietverträge</td>
+                <td class="table-detail-ctn">{{e.lfzMietVertrg}} %</td>
+                </tr>
+                {% endif %}
+                {% if e.energieAusweis.energiekennwert %}
+                <tr>
+                <td class="table-detail">Energiekennwert</td>
+                <td class="table-detail-ctn">{{e.energieAusweis.energiekennwert}} kWh</td>
+                </tr>
+                {% endif %}
+                {% if e.energieAusweis.effiziensklasse %}
+                <tr>
+                <td class="table-detail">Effiziensklasse</td>
+                <td class="table-detail-ctn">{{e.energieAusweis.effiziensklasse}}</td>
+                </tr>
+                {% endif %}
+                {% if e.energieAusweis.gueltigBis %}
+                <tr>
+                <td class="table-detail">Gültig bis</td>
+                <td class="table-detail-ctn">{{e.energieAusweis.gueltigBis}}</td>
+                </tr>
+                {% endif %}
+            </table>
+            <a href="{% url 'makler:special' e.bild.name e.title%}"><button type="button" class="btn btn-info btn-lg">
+                Bilder</button></a>
+            {% if e.video.video %}
+                <a href="{% url 'makler:specialv' e.video.name e.title %}"><button type="button" class="btn btn-info btn-lg">
+                    Video</button></a>
+            {% endif %}
+            {% if e.grdriss.grdriss1 %}
+                <a href="{% url 'makler:specialg' e.grdriss.name e.title %}"><button type="button" class="btn btn-info btn-lg">
+                    Grundrisse</button></a>
+            {% endif %}
+        {% if e.expose.expose %}
+            <a href="{% url 'makler:expose' e.expose.expose %}"><h3>Expose als Pdf</h3></a>
+        {% endif %}
+    </div>
+</div>
+    <div class="col-xs-12 col-md-5 col-lg-5">
+        <h2><b>Beschreibung</b></h2></br><p class="descript">{{e.objekbesrbng.objektbeschr|linebreaksbr}}</p>
+    </div>
+    <div class="col-xs-12 col-md-5 col-lg-5">
+        <h2><b>Lage</b></h2></br><p class="descript">{{e.objekbesrbng.lage|linebreaksbr}}</p>
+    </div>
+    {% if e.objekbesrbng.ausstattung %}
+    <div class="col-xs-12 col-md-4 col-lg-4">
+        <h2><b>Ausstatung</b></h2></br><p class="descript">{{e.objekbesrbng.ausstattung|linebreaksbr}}</p>
+    </div>
+    {% endif %}
+    {% endfor %}
+{% endblock %}

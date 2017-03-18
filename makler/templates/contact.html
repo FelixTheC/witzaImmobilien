@@ -1,0 +1,31 @@
+{% extends "index.html" %}
+    {% block content %}
+    <div class="col-xs-12 col-md-6 col-lg-6 container">
+        <h1>Kontakt</h1>
+        <form role="form" action="/danke/" method="post">
+            {% csrf_token %}
+            <input type="hidden" name="which" value="contact">
+            {{ form.as_p }}
+            <button class="btn btn-primary" type="submit">Senden</button>
+        </form>
+        <div class="col-xs-11 col-md-6 col-lg-6">
+        <div class="col-xs-12 hidden-md hidden-lg" style="margin-left: -15px">
+            <h2 style="margin-left: -5px; color:sandybrown">Telefonischer Kontakt</h2>
+            {% for c in contact %}
+            <button class="btn btn-default"><a href="{{c.buero}}">Büro</a></button>
+            <button class="btn btn-default" style="margin-left: 10px"><a href="{{c.mobile}}">Mobil</a></button>
+            {% endfor %}
+        </div>
+        </div>
+    </div>
+    {% endblock %}
+    {% block contact %}
+        <div class="col-xs-12 col-md-6 col-lg-6 container">
+        {% for c in contact %}
+        <h3>{{c.obererText}}</h3>
+            <img src="/media/{{c.bild}}">
+        <h2>{{c.untererText}}</h2>
+        <h2>{{c.addresse}}</h2>
+        {% endfor %}
+        </div>
+    {% endblock %}

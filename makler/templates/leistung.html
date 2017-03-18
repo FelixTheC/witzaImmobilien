@@ -1,0 +1,32 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{% block content %}
+<div class="col-xs-12 col-md-9 col-lg-9 container">
+    {%for l in leistung %}
+        {% if request.path == '/person/' %}
+            <h2 class="breadcrumb"><i>Meine Person</i></h2>
+        {% elif request.path == '/sell/' %}
+            <h2 class="breadcrumb"><i>Verkauf</i></h2>
+        {% elif request.path == '/buy/' %}
+            <h2 class="breadcrumb"><i>Ankauf</i></h2>
+        {% elif request.path == '/rating/' %}
+            <h2 class="breadcrumb"><i>Bewertung</i></h2>
+        {% elif request.path == '/consulting/' %}
+            <h2 style="color:maroon"><i>Beratung</i></h2>
+        {% endif %}
+        {% if l.bild %}
+            <img src="/media/{{l.bild}}" class="person">
+        {% endif %}
+        <h4>{{l.text|linebreaksbr}}</h4>
+    {% endfor %}
+</div>
+<div class="col-xs-12 col-md-3 col-lg-3 container">
+    <h3 class="contact">Kontaktdaten: </br>
+        {% for c in cont %}
+            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <a href="tel:+49 {{c.mobile}}">+49 (0){{c.mobile}}</a> </br>
+            <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+            <a href="{% url 'makler:contact' %}">{{c.mail}}</a>
+        {% endfor %}
+    </h3>
+</div>
+{% endblock %}

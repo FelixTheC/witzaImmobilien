@@ -1,0 +1,75 @@
+{% extends 'index.html' %}
+{% load staticfiles %}
+{%block head%}
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.4/jquery.touchSwipe.js"></script>
+    <link rel="shortcut icon" href="../favicon.ico" type="image/x-icon"/>
+    <script src="{%static 'base/modal.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'base/slider.css' %}" type="text/css" />
+{%endblock%}
+{%block contact%}
+<div class="col-xs-12 col-md-4 col-lg-4">
+    <h2 class="contact">Kontakt: </br>
+        {% for c in contact %}
+            <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <a href="tel:+49 {{c.mobile}}">+49 (0){{c.mobile}}</a> </br>
+        {% endfor %}
+    </h2>
+    <form role="form" action="/thanks/" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        {% for e in estate %}
+        <input type="hidden" name="estate" value="{{e.id}}">
+        {%endfor%}
+        <button type="submit">Senden/Send</button>
+    </form>
+</div>
+{%endblock%}
+{% block content %}
+<div class="col-xs-12 col-md-8 col-lg-8 container">
+    {% for e in estate %}
+        {% if 'gallery' in request.path %}
+            <div id="slideShow">
+                <img class="zoom" src="/static/base/img/{{e.bild.image1}}" />
+                {% if e.bild.image2 %}
+                    <img class="zoom" src="/static/base/img/{{e.bild.image2}}" />
+                {% endif %}
+                {% if e.bild.image3 %}
+                    <img class="zoom" src="/static/base/img/{{e.bild.image3}}" />
+                {% endif %}
+                {% if e.bild.image4 %}
+                    <img class="zoom" src="/static/base/img/{{e.bild.image4}}" />
+                {% endif %}
+                {% if e.bild.image5 %}
+                    <img class="zoom" src="/static/base/img/{{e.bild.image5}}" />
+                {% endif %}
+                {% if e.bild.image6 %}
+                    <img class="zoom" src="/static/base/img/{{e.bild.image6}}" />
+                {% endif %}
+                {% if e.bild.image7 %}
+                    <img class="zoom" src="/static/base/img/{{e.bild.image7}}" />
+                {% endif %}
+                {% if e.bild.image8 %}
+                    <img class="zoom" src="/static/base/img/{{e.bild.image8}}" />
+                {% endif %}
+                <div class="next">next</div>
+                <div class="prev">prev</div>
+            </div>
+        {% endif %}
+        {% if 'video' in request.path %}
+            <iframe width="560" height="315" src="{{e.video.video}}" frameborder="0" allowfullscreen></iframe>
+        {% endif %}
+
+        {% if 'grundriss' in request.path %}
+            <img src="/static/base/img/{{e.grdriss.grdriss1}}" height="480"/>
+            {% if e.grdriss.grdriss2 %}
+                <img src="/static/base/img/{{e.grdriss.grdriss2}}" height="480"/>
+            {% endif %}
+            {% if e.grdriss.grdriss3 %}
+                <img src="/static/base/img/{{e.grdriss.grdriss3}}" height="480"/>
+            {% endif %}
+        {% endif %}
+    </br>
+    <a style="margin-left:50%" href="{% url 'makler:estateDetail' e.title %}">Zurück</a>
+    {% endfor %}
+</div>
+{% endblock %}

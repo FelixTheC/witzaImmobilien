@@ -1,0 +1,6 @@
+Kontakt Name: {{ contact_gender }} {{ contact_name }}
+Kontakt Email: {{ contact_email }}
+
+Grund: {{ contact_anliegen }}
+
+Inhalt: {{ form_content|safe|striptags }}

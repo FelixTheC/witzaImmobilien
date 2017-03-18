@@ -1,0 +1,130 @@
+{% extends 'index.html' %}
+
+{% block contact %}
+<div class="col-xs-12 col-md-4 col-lg-4 container">
+    <h5 style="margin-left:50%; font-weight:bold">Informationen</h5>
+    <table class="table">
+        {% if request.path == '/impressum/' %} <tr class="info"> {% else %} <tr> {% endif %}
+            <td><a style="margin-left:50%" href="{% url 'makler:impressum' %}">Impressum</a></td>
+        </tr>
+        {% if request.path == '/impressum/datenschutz/' %} <tr class="info"> {% else %} <tr> {% endif %}
+            <td><a style="margin-left:50%" href="{% url 'makler:datenschutz' %}">Datenschutz</a></td>
+        </tr>
+        {% if request.path == '/impressum/agb/' %} <tr class="info"> {% else %} <tr> {% endif %}
+            <td><a style="margin-left:50%" href="{% url 'makler:agb' %}">AGB</a></td>
+        </tr>
+        {% if request.path == '/impressum/geldwaesche/' %} <tr class="info"> {% else %} <tr> {% endif %}
+            <td><a style="margin-left:50%" href="{% url 'makler:geldwaesche' %}">Geldwäsche</a></td>
+        </tr>
+        {% if request.path == '/impressum/verbraucherinfo/' %} <tr class="info"> {% else %} <tr> {% endif %}
+            <td><a style="margin-left:50%" href="{% url 'makler:verbraucherinfo' %}">Verbraucherinformation</a></td>
+        </tr>
+        <tr>
+            <td></td>
+        </tr>
+    </table>
+</div>
+{% endblock %}
+
+{% block content %}
+<div class="col-xs-12 col-md-8 col-lg-8 container">
+    {% if request.path == '/impressum/' %}
+        <h3>Herausgeber und verantwortlich für den Inhalt dieser Seiten</h3></br>
+        <h4>Holger Witza</br>
+        {% for c in contact %}</br>
+        {{c.addresse}}</br>
+        Mobil: {{c.mobile}}</br>
+        E-Mail: {{c.mail}}</br></br>
+        {% endfor %}
+        </h4>
+        <h4>Aufsichtsbehörde:</h4>
+        <h4>Umsatzsteuer-ID:</h4>
+        </br>
+        </br>
+        <h3>Webdesign & technische Realisierung der Webseite</h3>
+        <h4>-> The_cat. <-</h4>
+
+    {% elif request.path == '/impressum/datenschutz/' %}
+        <h4>Haftung für Inhalte</h4>
+        <h5>Die Inhalte unserer Seiten wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und
+            Aktualität der Inhalte können wir jedoch keine Gewähr übernehmen. Als Diensteanbieter sind wir gemäß § 7 Abs.1
+            TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind
+            wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu
+            überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur
+            Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt.
+            Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich.
+            Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.
+        </h5>
+        <br><br>
+        <h4>Haftung für Links</h4>
+        <h5>Unser Angebot enthält Links zu externen Webseiten Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb
+            können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist
+            stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich. Die verlinkten Seiten wurden zum
+            Zeitpunkt der Verlinkung auf mögliche Rechtsverstöße überprüft. Rechtswidrige Inhalte waren zum Zeitpunkt der
+            Verlinkung nicht erkennbar. Eine permanente inhaltliche Kontrolle der verlinkten Seiten ist jedoch ohne
+            konkrete Anhaltspunkte einer Rechtsverletzung nicht zumutbar. Bei Bekanntwerden von Rechtsverletzungen
+            werden wir derartige Links umgehend entfernen.
+        </h5>
+        <br><br>
+        <h4>Urheberrecht</h4>
+        <h5>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht.
+            Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des
+            Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers. Downloads und
+            Kopien dieser Seite sind nur für den privaten, nicht kommerziellen Gebrauch gestattet. Soweit die Inhalte auf
+            dieser Seite nicht vom Betreiber erstellt wurden, werden die Urheberrechte Dritter beachtet. Insbesondere
+            werden Inhalte Dritter als solche gekennzeichnet. Sollten Sie trotzdem auf eine Urheberrechtsverletzung
+            aufmerksam werden, bitten wir um einen entsprechenden Hinweis. Bei Bekanntwerden von Rechtsverletzungen
+            werden wir derartige Inhalte umgehend entfernen.
+        </h5>
+        <br><br>
+        <h4>Datenschutz</h4>
+        <h5><p>Die Nutzung unserer Webseite ist in der Regel ohne Angabe personenbezogener Daten möglich. Soweit auf
+            unseren Seiten personenbezogene Daten (beispielsweise Name, Anschrift oder eMail-Adressen) erhoben werden,
+            erfolgt dies, soweit möglich, stets auf freiwilliger Basis. Diese Daten werden ohne Ihre ausdrückliche
+            Zustimmung nicht an Dritte weitergegeben.</p><p>Wir weisen darauf hin, dass die Datenübertragung im Internet
+            (z.B. bei der Kommunikation per E-Mail) Sicherheitslücken aufweisen kann. Ein lückenloser Schutz der
+            Daten vor dem Zugriff durch Dritte ist nicht möglich.</p><p>Der Nutzung von im Rahmen der Impressumspflicht
+            veröffentlichten Kontaktdaten durch Dritte zur Übersendung von nicht ausdrücklich angeforderter Werbung und
+            Informationsmaterialien wird hiermit ausdrücklich widersprochen. Die Betreiber der Seiten behalten sich
+            ausdrücklich rechtliche Schritte im Falle der unverlangten Zusendung von Werbeinformationen,
+            etwa durch Spam-Mails, vor.</p></h5>
+        <br><br>
+        <h5><p>Quellenangaben:</p>
+            <p><a href="https://www.e-recht24.de/muster-disclaimer.html" target="_blank">www.e-recht24.de</a></p>
+        </h5>
+
+    {% elif request.path == '/impressum/agb/' %}
+        <h5>Folgt inkürze</h5>
+
+    {% elif request.path == '/impressum/geldwaesche/' %}
+    <h4>Geldwäsche</h4>
+    <h5><p>Sehr geehrte Kunden,</p><br>
+        <p>als Immobilienberatungsunternehmen haben wir als Verpflichtete gemäß § 2 Absatz 1 Nr. 10 Geldwäschegesetz (GwG)
+            die geldwäscherechtlichen Sorgfaltspflichten zu beachten. Hierzu gehört im Falle der Begründung einer
+            Geschäftsbeziehung die Feststellung der Identitiät durch Erheben von Angaben (Name, Anschrift, Geburtsdatum,
+            Geburtsort und Nationalität) und das Überprüfen der Identität des Vertragspartners bzw. des
+            wirtschaftlich Berechtigten.</p><p>Dies ist ein normaler Vorgang, zu dem wir gesetzlich verpflichtet sind
+            und bei dem Sie eine Mitwirkungspflicht haben.</p><p>Im Zuge dieser Identifizierung benötigen wir von Ihnen
+            eine Kopie Ihres gültigen Personalausweises. Bei unserem ersten gemeinsamen Treffen bzw. Besichtigung müssen
+            wir Ihren Ausweis nochmals im Original einsehen.</p><p>Bei juristischen Personen sind ein Handelsregisterauszug
+            und eine Gesellschafterliste erforderlich, um den wirtschaftlich Berechtigten zu identifizieren.
+            Wir weisen darauf hin, dass wir verpflichtet sind die erhobenen Daten mindestens 5 Jahre aufzubewahren.</p>
+        <p>Ich danke für Ihr Verständnis. </p>
+        <p>Holger Witza</p>
+    </h5>
+
+    {% elif request.path == '/impressum/verbraucherinfo/' %}
+    <h4>Informationen für Verbraucher:</h4>
+    <br>
+    <h5>Hinweis gem. Art. 14 Abs. 1 VO (EU) 524/2013 auf das Portal der EU-Kommission zur Online-Streitbeilegung:
+    <p><a href="https://www.ec.europa.eu/consumers/odr">www.ec.europa.eu/consumers/odr</a></p>
+    </h5>
+    <br>
+    <h5>Hinweis nach § 36 Abs. 2 Nr. 2 Verbraucherstreitbeilegungsgesetz: An Streitbeilegungsverfahren vor einer
+        Verbraucherschlichtungsstelle oder Universalschlichtungsstelle nehmen wir nicht teil und sind zur Teilnahme
+        auch nicht verpflichtet.
+    </h5>
+
+    {% endif %}
+</div>
+{% endblock %}

@@ -1,0 +1,167 @@
+{% load staticfiles %}
+<!doctype html>
+<html>
+<head>
+    {% block title %}
+        <title>Witza-Immobilien</title>
+    {% endblock %}
+        <meta charset="utf-8" />
+        <meta name="description" content="Immobilienmakler real-estate agent Witza-Immobilien">
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="{% static 'base/bootstrap/css/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'base/style.css' %}" type="text/css" />
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+        <script src="{%static 'base/bootstrap/js/bootstrap.js' %}"></script>
+    {% block head %}
+    {% endblock %}
+</head>
+<body>
+    <div class="col-xs-12 col-md-12 col-lg-offset-1 col-lg-10 container" id="content">
+        {% block body %}
+        <div class="col-xs-12 col-md-12 col-lg-12 container">
+        <a href="{% url 'makler:home' %}">
+            <img src="{% static 'base/img/logowitzatest.png' %}" style="width: 100%; margin-top:-6px;" alt="main-pic"/>
+        </a>
+        <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                  </button>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                  <ul class="nav navbar-nav">
+                    <li><a href="{% url 'makler:home' %}">Home</a><span class="sr-only">(current)</span></li>
+                    <li class="dropdown">
+                      <a href="." class="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Leistungen <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{% url 'makler:person' %}">Meine Person</a></li>
+                        <li><a href="{% url 'makler:sell' %}">Verkaufen</a></li>
+                        <li><a href="{% url 'makler:buy' %}">Ankaufen</a></li>
+                        <li><a href="{% url 'makler:rating' %}">Bewertung</a></li>
+                        <li><a href="{% url 'makler:consulting' %}">Beratung</a></li>
+                      </ul>
+                    </li>
+                    <li class="dropdown">
+                      <a href="." class="dropdown" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Immobilien <span class="caret"></span></a>
+                      <ul class="dropdown-menu">
+                        <li><a href="{% url 'makler:one' %}">Einfamilienhäuser</a></li>
+                        <li><a href="{% url 'makler:eigen' %}">Whg eigennutzung</a></li>
+                        <li><a href="{% url 'makler:kapital' %}">Whg kapital</a></li>
+                        <li><a href="{% url 'makler:more' %}">Mehrfamilienhäuser</a></li>
+                        <li><a href="{% url 'makler:plot' %}">Grundstücke</a></li>
+                        <li><a href="{% url 'makler:business' %}">Gewerbeobjekte</a></li>
+                        <li><a href="{% url 'makler:sold' %}">Refferrenzen</a></li>
+                      </ul>
+                    </li>
+                      <li><a href="{% url 'makler:contact' %}">Kontakt</a><span class="sr-only">(current)</span></li>
+                      <li><a href="{% url 'makler:impressum' %}">Impressum</a><span class="sr-only">(current)</span></li>
+                  </ul>
+                </div>
+            </div>
+        </nav>
+        </div>
+        {% if request.path != '/' and '/estate/' not in request.path %}
+        <div class="col-xs-12 col-md-8 col-lg-8 container">
+            {% if request.path == '/onefamily/' %}
+            <h2 class="breadcrumb"><i>Einfamilienhäuser</i></h2>
+            {% elif request.path == '/whgeigen/' %}
+                <h2 class="breadcrumb"><i>Wohnungen eigennutzung</i></h2>
+            {% elif request.path == '/whgkapital/' %}
+                <h2 class="breadcrumb"><i>Wohnungen kapitalanlage</i></h2>
+            {% elif request.path == '/morefamily/' %}
+                <h2 class="breadcrumb"><i>Mehrfamilienhäuser</i></h2>
+            {% elif request.path == '/plot/' %}
+                <h2 class="breadcrumb"><i>Grundstücke</i></h2>
+            {% elif request.path == '/business/' %}
+                <h2 class="breadcrumb"><i>Gewerbeobjekte</i></h2>
+            {% elif request.path == '/impressum/' %}
+                <h2 class="breadcrumb"><i>Impressum</i></h2>
+            {% elif request.path == '/sold/' %}
+                <h2 class="breadcrumb"><i>Refferenzen</i></h2>
+            {% elif request.path == '/impressum/datenschutz/' %}
+                <h2 class="breadcrumb"><i>Datenschutz</i></h2>
+            {% elif request.path == '/impressum/agb/' %}
+                <h2 class="breadcrumb"><i>Allgemeine Geschäftsbedingungen</i></h2>
+            {% elif request.path == '/impressum/geldwaesche/' %}
+                <h2 class="breadcrumb"><i>Geldwäsche</i></h2>
+            {% elif request.path == '/impressum/verbraucherinfo/' %}
+                <h2 class="breadcrumb"><i>Verbraucherinformation</i></h2>
+            {% endif %}
+        </div>
+        {% endif %}
+        {% endblock %}
+        {% block content %}
+             <div class="col-xs-12 col-md-6 col-lg-6 container">
+                {% for n in news %}
+                    {% if forloop.counter < 4 %}
+                        <h2>{{n.title}}</h2>
+                        <p style="font-size:1.3em">{{n.obererText}}</p>
+                        <p style="font-size:1.3em">
+                            <img src="/media/{{n.bild}}" alt=".." style="float:left; max-height:200px; margin-right: 10px">
+                            {{n.untererText}}
+                        </p>
+                        <a href="{{n.link}}" target="_blank">{{n.linkname}}</a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="col-xs-12 col-md-offset-2 col-md-4 col-lg-offset-2 col-lg-4 container">
+            <h3 class="contact">Kontaktdaten: </br>
+                {% for c in cont %}
+                <span class="glyphicon glyphicon-earphone" aria-hidden="true"></span> <a href="tel:+49 {{c.mobile}}">+49 (0){{c.mobile}}</a> </br>
+                <span class="glyphicon glyphicon-envelope" aria-hidden="true"></span>
+                <a href="{% url 'makler:contact' %}">{{c.mail}}</a></h3>
+                {% endfor %}
+            <h2>Neue Objekte</h2>
+            {% for e in estates %}
+                <div class="thumbnail bild-container">
+                <img src="{%static 'base/img/' %}{{e.bild.image1}}" alt="..." style="max-height:250px" class="bild">
+                    <div class="overlay">
+                        <h3>{{e.title}}</h3>
+                        <h4>Lage: {{e.lage}}</h4>
+                        <h4>Objektart: {{e.objektart}}</h4>
+                        <a href="{%url 'makler:estateDetail' e.title %}"><h2>Details</h2></a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        {% endblock %}
+        {% block contact %}
+            <div class="col-xs-12 col-md-6 col-lg-6 container"></div>
+        {% endblock %}
+
+    {%block footer %}
+    <footer>
+        <div class="col-xs-12 col-md-12 col-lg-12 container ftr-style">
+        <div class="col-xs-12 col-md-2 col-lg-2 container footer-container">
+            <p class="footer-bold" style="font-weight:bold;">Holger Witza</p>
+            {% for c in cont %}
+            <p class="footer">{{c.addresse}}</p>
+            <p class="footer-mobile">Mobile: {{c.mobile}}</p>
+            {% endfor %}
+        </div>
+        <div class="col-xs-12 col-md-2 col-lg-2 container footer-container">
+            <p class="footer-sparkasse">Ihr Immobilienmakler für Brandenburg, Potsdam und</p>
+            <p class="footer footer-sparkasse">Potsdam-Mittelmark</p>
+        </div>
+        <div class="col-xs-12 col-md-4 col-lg-4 container footer-container">
+            <img src="{% static 'base/img/sparkasse-links.png' %}" class="sparkasse-logo" alt="main-pic"/>
+        </div>
+        <div class="col-xs-12 col-md-offset-2 col-md-2 col-lg-offset-2 col-lg-2 container footer-container">
+            <p style="font-size:0.85em;color:white;"> &copy; 2017 The_cat</p>
+        </div>
+        </div>
+    </footer>
+    <div class="col-xs-12 col-md-12 col-lg-offset-1 col-lg-10 container ">
+            <h1> </h1>
+        </div>
+    {% endblock %}
+        </div>
+</body>
+</html>
