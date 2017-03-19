@@ -87,3 +87,9 @@ ENV/
 
 # Rope project settings
 .ropeproject
+
+# Secrect stuff
+emailname.txt
+pwd.txt
+secretkey.txt
+
