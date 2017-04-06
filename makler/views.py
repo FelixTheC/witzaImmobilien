@@ -10,7 +10,7 @@ import os
 from django.http import HttpResponse
 from django.http.response import HttpResponseRedirect
 import mimetypes
-import urllib
+import urllib.parse
 
 
 def home(request):
@@ -366,6 +366,6 @@ def expose(request, filename):
             filename_header = ''
         else:
             # For others like Firefox, we follow RFC2231 (encoding extension in HTTP headers).
-            filename_header = 'filename*=UTF-8\'\'%s' % urllib.quote(original_filename.encode('utf-8'))
+            filename_header = 'filename*=UTF-8\'\'%s' % urllib.parse.quote(original_filename.encode('utf-8'))
         response['Content-Disposition'] = 'attachment; ' + filename
         return response
