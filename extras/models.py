@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from filer.fields.image import FilerImageField
 
 
 def image_upload_path(instance, filename):
@@ -34,7 +35,8 @@ class Images(models.Model):
     image5 = models.ImageField(upload_to=image_upload_path, blank=True)
     image6 = models.ImageField(upload_to=image_upload_path, blank=True)
     image7 = models.ImageField(upload_to=image_upload_path, blank=True)
-    image8 = models.ImageField(upload_to=image_upload_path, blank=True)
+    image8 = FilerImageField(null=True, blank=True,
+                           related_name="image8")
     created = models.DateField(default=timezone.now, editable=False)
 
     def __str__(self):

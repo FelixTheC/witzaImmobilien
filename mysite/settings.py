@@ -11,7 +11,6 @@ https://docs.djangoproject.com/en/1.10/ref/settings/
 """
 
 import os
-import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -22,20 +21,19 @@ PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-with open(PROJECT_ROOT +'/secretkey.txt') as f:
-    SECRET_KEY = f.read().strip()
+SECRET_KEY = 'h^uz6^gq#z_2@5%t6uqii8^*6lj5qn==)pjjbaons0651k+)lv'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 ADMINS = [('Felix', 'fberndt87@gmail.com')]
 
-ALLOWED_HOSTS = ['www.witza-immobilien.de', 'witza-immobilien.de']
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-SECURE_CONTENT_TYPE_NOSNIFF = True
-SECURE_BROWSER_XSS_FILTER = True
-SECURE_SSL_REDIRECT = True
+ALLOWED_HOSTS = ['www.witza-immobilien.de', 'witza-immobilien.de', '*']
+#SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+#SECURE_CONTENT_TYPE_NOSNIFF = True
+#SECURE_BROWSER_XSS_FILTER = True
+#SECURE_SSL_REDIRECT = True
 
-SESSION_COOKIE_SECURE = True
+#SESSION_COOKIE_SECURE = True
 CSRF_COOKIE_SECURE = True
 
 # Application definition
@@ -48,13 +46,15 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'filer',
+    'easy_thumbnails',
     'makler',
     'extras',
     'securemail',
     'ckeditor',
 ]
 
-MIDDLEWARE = [
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -62,7 +62,6 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 ]
 
 ROOT_URLCONF = 'mysite.urls'
@@ -130,8 +129,7 @@ USE_L10N = True
 USE_TZ = True
 
 # Update database configuration with $DATABASE_URL.
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
@@ -158,10 +156,8 @@ STATICFILES_DIRS = (
 # EMAIL Settings
 EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
 EMAIL_HOST = "smtp.gmail.com"
-with open(PROJECT_ROOT +'/emailname.txt') as f:
-    EMAIL_HOST_USER = f.read().strip()
-with open(PROJECT_ROOT +'/pwd.txt') as f:
-    EMAIL_HOST_PASSWORD = f.read().strip()
+EMAIL_HOST_USER = "fberndt87@gmail.com"
+EMAIL_HOST_PASSWORD = "schei$$Pwd404"
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 DEFAULT_FROM_EMAIL = "hompage@page.de"
