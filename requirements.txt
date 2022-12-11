@@ -5,7 +5,7 @@ gunicorn==19.6.0
 psycopg2==2.6.1
 Pillow==9.3.0
 whitenoise==3.0
-PyPDF2==1.25.1
+PyPDF2==1.27.5
 django-extensions==1.5.9
 -e git+https://github.com/chrisglass/django-xhtml2pdf.git@94c0d1e42c4ac05ba6ec8f1535700ab78ae1bb26#egg=django_xhtml2pdf
 html5lib==0.9999999
